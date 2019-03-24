@@ -1,4 +1,4 @@
-AWS_REGION ?= us-west-2
+AWS_REGION ?= eu-west-1
 
 # Defaults to Amazon Linux 2 LTS AMI
 # * use the us-west-2 minimal hvm image
