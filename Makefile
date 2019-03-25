@@ -1,4 +1,4 @@
-AWS_REGION ?= us-west-2
+AWS_REGION ?= eu-west-1
 
 # Defaults to Amazon Linux 2 LTS AMI
 # * use the us-west-2 minimal hvm image
@@ -37,4 +37,5 @@ validate:
 		-var kubernetes_version=1.11 \
 		-var binary_bucket_path=1.11.8/2019-03-13/bin/linux/amd64 \
 		-var source_ami_id=$(SOURCE_AMI_ID) \
+		-var subnet_id=$(SUBNET_ID) \
 		eks-worker-al2.json
