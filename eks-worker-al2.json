@@ -2,7 +2,7 @@
   "variables": {
     "kubernetes_version": "1.11",
     "aws_region": "eu-west-1",
-    "ami_name": "dliver-eks-node-{{timestamp}}",
+    "ami_name": "dliver-eks-node-1.11-v20190325",
     "binary_bucket_name": "amazon-eks",
     "binary_bucket_region": "us-west-2",
     "binary_bucket_path": "1.11.8/2019-03-13/bin/linux/amd64",
