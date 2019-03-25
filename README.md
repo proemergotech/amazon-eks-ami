@@ -2,5 +2,9 @@ Read the original README for ami related information.
 https://github.com/awslabs/amazon-eks-ami
 
 To update the `eni-max-pods.txt`, run `update_ip_limit.go`.  
-Change the `ami_name` and `subnet_id` (if necessary) in `eks-worker-al2.json` variables section.  
-We need to provide the `subnet_id` variable because we don't have a default vpc.  
+We need to provide a `subnet_id` to make because we don't have a default vpc.
+```bash
+make SUBNET_ID=subnet-11111
+```  
+It can be any subnet with internet access, but prefer one from the `dev` environment.  
+
