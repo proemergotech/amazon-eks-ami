@@ -10,7 +10,20 @@ import (
 	"strings"
 )
 
-const maxPodsPath = "./files/eni-max-pods.txt"
+const (
+	maxPodsPath = "./files/eni-max-pods.txt"
+)
+
+var (
+	// see the comment at the top of the eni-max-pods.txt
+	ipPerENIExceptions = map[string]int{
+		"f1.16xlarge": 31,
+		"g3.16xlarge": 31,
+		"h1.16xlarge": 31,
+		"i3.16xlarge": 31,
+		"r4.16xlarge": 31,
+	}
+)
 
 func main() {
 	cmd := exec.Command("sh", "-c", `curl -s https://raw.githubusercontent.com/awsdocs/amazon-ec2-user-guide/master/doc_source/using-eni.md | grep '^|' | tr -d '` + "`" + `' | sed -e '1,2d ; s/\\./\./g ; s/ *| */|/g' | cut -d '|' --output-delimiter=' ' -f2,3,4`)
@@ -27,6 +40,10 @@ func main() {
 		instanceType := f[0]
 		maxENI, _ := strconv.Atoi(f[1])
 		maxIPPerENI, _ := strconv.Atoi(f[2])
+
+		if m, ok := ipPerENIExceptions[instanceType]; ok {
+			maxIPPerENI = m
+		}
 		
 		limits[instanceType] = maxENI * (maxIPPerENI - 1) + 2
 	}
